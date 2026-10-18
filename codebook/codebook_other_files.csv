@@ -1,0 +1,25 @@
+file,column,meaning
+id_crosswalk_all.csv,fight_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,ufc_event_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,ufc_event_url,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,f1_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,f2_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_decision_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_swapped,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_name_sim,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_total_agree,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_cards,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_day_gap,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,mmad_event_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,bfo_profile_url,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,bfo_date,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,bfo_owner_id,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,bfo_owner_sim,source ID or match-quality measure linking the fight to a source
+id_crosswalk_all.csv,bfo_opponent_sim,source ID or match-quality measure linking the fight to a source
+judge_names.csv,judge_id,MMA Decisions judge ID
+judge_names.csv,judge_name,Judge name as listed on MMA Decisions
+judge_names.csv,n_cards,Cards scored by the judge in the data
+jurisdiction_lookup.csv,event_country,Country of the event
+jurisdiction_lookup.csv,event_state,State or province of the event
+jurisdiction_lookup.csv,n_fights,Fights at that location when the table was made
+jurisdiction_lookup.csv,jurisdiction,Jurisdiction used in the data

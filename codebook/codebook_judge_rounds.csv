@@ -1,0 +1,70 @@
+column,group,meaning,type,share_missing,example
+fight_id,identity,ufcstats fight ID; links to the fights file,text,0.0,295339c08c80a3cf
+mmad_decision_id,identity,MMA Decisions decision ID,integer,0.0,16398
+judge_id,identity,MMA Decisions judge ID,integer,0.0006,357.0
+judge_name,identity,Judge name as listed on MMA Decisions,text,0.0,Michael Bell
+judge_pos,identity,"Position of the judge's card on the MMA Decisions page, 1 to 3",integer,0.0,1
+round,identity,Round number,integer,0.0,1
+event_date,context,"Event date, YYYY-MM-DD",text,0.0,2026-10-10
+event_year,context,Calendar year of the event,integer,0.0,2026
+jurisdiction,context,"Jurisdiction of the event, from the jurisdiction table",text,0.0,Nevada
+bout_division,context,Weight division parsed from the bout text,text,0.0113,lightweight
+scheduled_rounds,context,Scheduled number of rounds,integer,0.0,3
+is_five_round_fight,context,True for a five-round fight,true/false,0.0,False
+is_title_bout,context,True for a championship bout,true/false,0.0,False
+rules_2017_era,context,True when the event is on or after 2017-01-01,true/false,0.0,True
+rules_2025_era,context,True when the event is on or after 2025-08-06,true/false,0.0,True
+primary_is_f1,primary fighter,True when the randomly chosen primary fighter is fighter 1 in the fights file,true/false,0.0,False
+primary_name,primary fighter,"Name of the primary fighter, chosen at random for each fight",text,0.0,Jai Herbert
+opponent_name,primary fighter,Name of the other fighter,text,0.0,Matheus Camilo
+primary_score_published,outcome,"Primary fighter's score for the round as published, after deductions",integer,0.0,9
+opponent_score_published,outcome,"Opponent's score for the round as published, after deductions",integer,0.0,10
+primary_score_raw,outcome,Primary fighter's score with the deducted point added back,integer,0.0,9
+opponent_score_raw,outcome,Opponent's score with the deducted point added back,integer,0.0,10
+margin_published,outcome,"Primary minus opponent, as published",integer,0.0,-1
+margin_raw,outcome,"Primary minus opponent, before deductions",integer,0.0,-1
+primary_won_round,outcome,"1 if the primary fighter won the round before deductions, 0 if the opponent did, blank for an even round",integer,0.0005,0.0
+is_even_round,outcome,True when the round was scored even before deductions,true/false,0.0,False
+is_10_9_round,outcome,True when the round margin was exactly one point before deductions,true/false,0.0,True
+is_wide_round,outcome,True when the round margin was two or more points before deductions,true/false,0.0,False
+deduction_in_round,outcome,True when a point deduction affected the round,true/false,0.0,False
+prev_round_primary_won,previous round and lead,"1 if the primary fighter won this judge's previous round before deductions, 0 if lost, blank for round 1 or an even previous round",integer,0.3166,0.0
+prev_round_margin_raw,previous round and lead,"This judge's previous-round margin, primary minus opponent, before deductions",integer,0.3164,-1.0
+lead_pts_before_round,previous round and lead,Primary minus opponent in published points over this judge's earlier rounds,integer,0.0,0
+rounds_remaining_incl_current,previous round and lead,"Scheduled rounds left, counting the current round",integer,0.0,3
+insurmountable_lead_primary,previous round and lead,"1 if the primary fighter's lead is at least 2 points per remaining round, -1 if the opponent's is, 0 otherwise; the raw ingredients are in the columns above",integer,0.0,0
+primary_open_prob_novig,"odds, rank, champion",Primary fighter's opening win probability with the bookmaker margin removed,number,0.0066,0.3712
+primary_close_prob_novig,"odds, rank, champion","Primary fighter's closing win probability, margin removed",number,0.0066,0.3626
+primary_is_favorite_open,"odds, rank, champion",True when the primary fighter was the opening favorite,true/false,0.0066,False
+primary_rank,"odds, rank, champion",Primary fighter's official rank on the last weekly board; 0 is champion; blank means unranked,integer,0.6613,8.0
+opponent_rank,"odds, rank, champion",Opponent's official rank; blank means unranked,integer,0.6731,8.0
+primary_is_ranked,"odds, rank, champion",True when the primary fighter was ranked,true/false,0.0,False
+opponent_is_ranked,"odds, rank, champion",True when the opponent was ranked,true/false,0.0,False
+primary_is_champion,"odds, rank, champion",True when the primary fighter was champion,true/false,0.0,False
+opponent_is_champion,"odds, rank, champion",True when the opponent was champion,true/false,0.0,False
+age_diff_primary,fighter differences,"Primary age minus opponent age, in years",number,0.0,12.639999999999995
+reach_diff_cm_primary,fighter differences,"Primary reach minus opponent reach, in centimeters",number,0.0375,20.32000000000002
+height_diff_cm_primary,fighter differences,"Primary height minus opponent height, in centimeters",number,0.0,7.619999999999976
+has_odds,"odds, rank, champion",True when odds were found for the fight,true/false,0.0,True
+diff_kd,round statistics,Primary minus opponent: knockdowns in this round,integer,0.0,0
+diff_sig_str_landed,round statistics,Primary minus opponent: significant strikes landed in this round,integer,0.0,-4
+diff_sig_str_att,round statistics,Primary minus opponent: significant strikes attempted in this round,integer,0.0,9
+diff_total_str_landed,round statistics,Primary minus opponent: total strikes landed in this round,integer,0.0,-5
+diff_total_str_att,round statistics,Primary minus opponent: total strikes attempted in this round,integer,0.0,8
+diff_td_landed,round statistics,Primary minus opponent: takedowns landed in this round,integer,0.0,-1
+diff_td_att,round statistics,Primary minus opponent: takedowns attempted in this round,integer,0.0,-1
+diff_sub_att,round statistics,Primary minus opponent: submission attempts in this round,integer,0.0,0
+diff_rev,round statistics,Primary minus opponent: reversals in this round,integer,0.0,0
+diff_ctrl_sec,round statistics,Primary minus opponent: control time in seconds in this round,integer,0.0,-62
+diff_head_landed,round statistics,Primary minus opponent: head strikes landed in this round,integer,0.0,-2
+diff_head_att,round statistics,Primary minus opponent: head strikes attempted in this round,integer,0.0,11
+diff_body_landed,round statistics,Primary minus opponent: body strikes landed in this round,integer,0.0,0
+diff_body_att,round statistics,Primary minus opponent: body strikes attempted in this round,integer,0.0,2
+diff_leg_landed,round statistics,Primary minus opponent: leg strikes landed in this round,integer,0.0,-2
+diff_leg_att,round statistics,Primary minus opponent: leg strikes attempted in this round,integer,0.0,-4
+diff_distance_landed,round statistics,Primary minus opponent: strikes landed at distance in this round,integer,0.0,1
+diff_distance_att,round statistics,Primary minus opponent: strikes attempted at distance in this round,integer,0.0,16
+diff_clinch_landed,round statistics,Primary minus opponent: strikes landed in the clinch in this round,integer,0.0,-1
+diff_clinch_att,round statistics,Primary minus opponent: strikes attempted in the clinch in this round,integer,0.0,-1
+diff_ground_landed,round statistics,Primary minus opponent: ground strikes landed in this round,integer,0.0,-4
+diff_ground_att,round statistics,Primary minus opponent: ground strikes attempted in this round,integer,0.0,-6

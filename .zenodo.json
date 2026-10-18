@@ -1,0 +1,21 @@
+{
+  "title": "UFC Data: scorecards, round statistics, and betting odds, 2013 to 2026",
+  "upload_type": "dataset",
+  "description": "<p>Fight-level and judge-round data for UFC fights from 2013-02-16 through 2026-10-10, linking judges' round-by-round scorecards to round statistics, betting odds, official rankings at fight time, and fighter attributes.</p><p>See README.md and METHODS.md for what is included, how it was built, and known limitations.</p><p>This project is independent. It is not affiliated with, endorsed by, or sponsored by the UFC. UFC and related marks belong to their owners.</p>",
+  "creators": [
+    {
+      "name": "Bair, Noah",
+      "affiliation": "Syracuse University"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "version": "0.1.0",
+  "access_right": "open",
+  "keywords": [
+    "mixed martial arts",
+    "UFC",
+    "judging",
+    "sports betting",
+    "market efficiency"
+  ]
+}
