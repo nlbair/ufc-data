@@ -1,366 +1,367 @@
 column,group,meaning,source,type,share_missing,example
-fight_id,identity,ufcstats fight ID (16 characters); the main key linking every file,ufcstats,text,0.0,295339c08c80a3cf
+fight_id,identity,ufcstats fight ID (16 characters); the main key linking every file,ufcstats,text,0.0,7db1a3dac7e343e7
 mmad_decision_id,identity,MMA Decisions decision ID; blank when the fight has no matched page,MMA Decisions,integer,0.5112,16398.0
 mmad_url,identity,Address of the MMA Decisions page for the fight,MMA Decisions,text,0.5271,https://mmadecisions.com/decision/16398/Jai-Herbert-vs-Mathe
 event_date,identity,"Event date, YYYY-MM-DD, as listed by ufcstats",ufcstats,text,0.0,2026-10-10
 event_year,identity,Calendar year of the event,"ufcstats, computed",integer,0.0,2026
+card_position,identity,"Position of the fight on its card as listed by ufcstats: 1 is the main event, and higher numbers are earlier on the card","ufcstats, computed",integer,0.0,1
 event_name,identity,Event name,ufcstats,text,0.0,UFC Fight Night: Allen vs. Duncan
 event_city,identity,City of the event,ufcstats,text,0.0,Las Vegas
 event_state,identity,"State or province of the event, when ufcstats lists one",ufcstats,text,0.0731,Nevada
 event_country,identity,Country of the event,ufcstats,text,0.0,USA
 mmad_event_name,identity,Event name as listed by MMA Decisions,MMA Decisions,text,0.5271,UFC Fight Night 290: Allen vs. Duncan
 mmad_location,identity,Location as listed by MMA Decisions,MMA Decisions,text,0.5271,"Las Vegas, Nevada, USA"
-bout_text,identity,"Bout description on ufcstats, for example UFC Welterweight Title Bout",ufcstats,text,0.0,Lightweight Bout
-bout_division,identity,Weight division parsed from the bout text; blank for catch weight and open weight bouts,"ufcstats, computed",text,0.011,lightweight
-referee_ufcstats,identity,Referee as listed by ufcstats,ufcstats,text,0.0,Herb Dean
+bout_text,identity,"Bout description on ufcstats, for example UFC Welterweight Title Bout",ufcstats,text,0.0,Middleweight Bout
+bout_division,identity,Weight division parsed from the bout text; blank for catch weight and open weight bouts,"ufcstats, computed",text,0.011,middleweight
+referee_ufcstats,identity,Referee as listed by ufcstats,ufcstats,text,0.0,Marc Goddard
 referee_mmad,identity,Referee as listed by MMA Decisions,MMA Decisions,text,0.5271,Herb Dean
 is_title_bout,rules and context,"True for a championship bout, interim titles included; tournament finals are excluded","ufcstats, computed",true/false,0.0,False
 is_interim_title,rules and context,True for an interim championship bout,"ufcstats, computed",true/false,0.0,False
 is_tournament_final,rules and context,True for a tournament final such as The Ultimate Fighter or Road to UFC,"ufcstats, computed",true/false,0.0,False
-scheduled_rounds,rules and context,"Scheduled number of rounds, from the time format","ufcstats, computed",integer,0.0,3
-time_format,rules and context,"Time format as printed by ufcstats, for example 5 Rnd (5-5-5-5-5)",ufcstats,text,0.0,3 Rnd (5-5-5)
+scheduled_rounds,rules and context,"Scheduled number of rounds, from the time format","ufcstats, computed",integer,0.0,5
+time_format,rules and context,"Time format as printed by ufcstats, for example 5 Rnd (5-5-5-5-5)",ufcstats,text,0.0,5 Rnd (5-5-5-5-5)
 rules_2017_era,rules and context,True when the event date is on or after 2017-01-01,computed,true/false,0.0,True
 rules_2025_era,rules and context,True when the event date is on or after 2025-08-06,computed,true/false,0.0,True
 jurisdiction,rules and context,"US state, Canadian province, Australian state, or country of the event, from the jurisdiction table",computed,text,0.0,Nevada
-method,outcome,"How the fight ended, as listed by ufcstats",ufcstats,text,0.0,Decision - Unanimous
-end_round,outcome,Round in which the fight ended,ufcstats,integer,0.0,3
-end_time,outcome,"Time in that round when the fight ended, m:ss",ufcstats,text,0.0,5:00
-result_f1,outcome,"Result for fighter 1: W, L, D, or NC",ufcstats,text,0.0,L
-result_f2,outcome,"Result for fighter 2: W, L, D, or NC",ufcstats,text,0.0,W
-winner,outcome,"1 or 2 for the winner, 0 for a draw, blank for a no contest or overturned result","ufcstats, computed",integer,0.0111,2.0
-is_unanimous,outcome,True for a unanimous decision,"ufcstats, computed",true/false,0.0,True
+method,outcome,"How the fight ended, as listed by ufcstats",ufcstats,text,0.0,Submission
+end_round,outcome,Round in which the fight ended,ufcstats,integer,0.0,5
+end_time,outcome,"Time in that round when the fight ended, m:ss",ufcstats,text,0.0,2:46
+result_f1,outcome,"Result for fighter 1: W, L, D, or NC",ufcstats,text,0.0,W
+result_f2,outcome,"Result for fighter 2: W, L, D, or NC",ufcstats,text,0.0,L
+winner,outcome,"1 or 2 for the winner, 0 for a draw, blank for a no contest or overturned result","ufcstats, computed",integer,0.0111,1.0
+is_unanimous,outcome,True for a unanimous decision,"ufcstats, computed",true/false,0.0,False
 is_split,outcome,True for a split decision,"ufcstats, computed",true/false,0.0,False
 is_majority,outcome,True for a majority decision or majority draw,"ufcstats, computed",true/false,0.0,False
 is_draw,outcome,True when the fight was scored a draw,"ufcstats, computed",true/false,0.0,False
-is_decision,outcome,True when the fight went to the judges,"ufcstats, computed",true/false,0.0,True
-finish_type,outcome,"decision, ko_tko, submission, dq, overturned, could_not_continue, or other","ufcstats, computed",text,0.0,decision
-is_finish,outcome,True for a KO/TKO or submission finish,"ufcstats, computed",true/false,0.0,False
-finish_round,outcome,Round of the finish; blank for decisions,"ufcstats, computed",integer,0.4898,1.0
-finish_time_sec,outcome,Seconds into the finishing round; blank for decisions,"ufcstats, computed",integer,0.4898,300.0
-fight_duration_sec,outcome,"Total fight time in seconds, from the round lengths and the end time","ufcstats, computed",integer,0.0,900
-scheduled_duration_sec,outcome,Scheduled fight time in seconds,"ufcstats, computed",integer,0.0,900
-method_detail,outcome,Detail text ufcstats gives for a finish; blank for decisions,ufcstats,text,0.4928,to Zhelezniakova cut
-n_judge_cards,outcome,Number of judges' cards with round-by-round scores on MMA Decisions,"MMA Decisions, computed",integer,0.0,3
-has_round_scores,outcome,True when at least one judge's round-by-round scores are available,"MMA Decisions, computed",true/false,0.0,True
+is_decision,outcome,True when the fight went to the judges,"ufcstats, computed",true/false,0.0,False
+finish_type,outcome,"decision, ko_tko, submission, dq, overturned, could_not_continue, or other","ufcstats, computed",text,0.0,submission
+is_finish,outcome,True for a KO/TKO or submission finish,"ufcstats, computed",true/false,0.0,True
+finish_round,outcome,Round of the finish; blank for decisions,"ufcstats, computed",integer,0.4898,5.0
+finish_time_sec,outcome,Seconds into the finishing round; blank for decisions,"ufcstats, computed",integer,0.4898,166.0
+fight_duration_sec,outcome,"Total fight time in seconds, from the round lengths and the end time","ufcstats, computed",integer,0.0,1366
+scheduled_duration_sec,outcome,Scheduled fight time in seconds,"ufcstats, computed",integer,0.0,1500
+method_detail,outcome,Detail text ufcstats gives for a finish; blank for decisions,ufcstats,text,0.4928,Rear Naked Choke
+n_judge_cards,outcome,Number of judges' cards with round-by-round scores on MMA Decisions,"MMA Decisions, computed",integer,0.0,0
+has_round_scores,outcome,True when at least one judge's round-by-round scores are available,"MMA Decisions, computed",true/false,0.0,False
 judges_for_f1,outcome,Number of judges whose card total favored fighter 1,"MMA Decisions, computed",integer,0.5271,0.0
 judges_for_f2,outcome,Number of judges whose card total favored fighter 2,"MMA Decisions, computed",integer,0.5271,3.0
 judges_even,outcome,Number of judges who scored the fight even,"MMA Decisions, computed",integer,0.5271,0.0
-f1_name,fighters,Fighter 1: Name as listed by ufcstats,ufcstats,text,0.0,Matheus Camilo
-f1_id,fighters,Fighter 1: ufcstats fighter ID,ufcstats,text,0.0,72f890c5d421e705
-f1_age,fighters,Fighter 1: Age in years on the event date; date of birth is not published,"ufcstats, computed",number,0.0,25.77
-f1_height_cm,fighters,Fighter 1: Height in centimeters; blank when ufcstats lists none,ufcstats,number,0.0003,177.8
-f1_reach_cm,fighters,Fighter 1: Reach in centimeters; blank when ufcstats lists none,ufcstats,number,0.0139,175.26
+f1_name,fighters,Fighter 1: Name as listed by ufcstats,ufcstats,text,0.0,Brendan Allen
+f1_id,fighters,Fighter 1: ufcstats fighter ID,ufcstats,text,0.0,2f181c0467965b98
+f1_age,fighters,Fighter 1: Age in years on the event date; date of birth is not published,"ufcstats, computed",number,0.0,30.78
+f1_height_cm,fighters,Fighter 1: Height in centimeters; blank when ufcstats lists none,ufcstats,number,0.0003,187.96
+f1_reach_cm,fighters,Fighter 1: Reach in centimeters; blank when ufcstats lists none,ufcstats,number,0.0139,190.5
 f1_stance,fighters,Fighter 1: Stance; blank when ufcstats lists none,ufcstats,text,0.0016,Orthodox
-f1_rank,fighters,Fighter 1: Official UFC rank on the last weekly board before the event; 0 is the champion; blank means unranked,"rankings, computed",integer,0.6648,8.0
-f1_is_ranked,fighters,Fighter 1: True when the fighter was ranked on that board,"rankings, computed",true/false,0.0,False
-f1_rank_division,fighters,Fighter 1: Division of the board the rank comes from,"rankings, computed",text,0.6648,womensstrawweight
+f1_rank,fighters,Fighter 1: Official UFC rank on the last weekly board before the event; 0 is the champion; blank means unranked,"rankings, computed",integer,0.6648,4.0
+f1_is_ranked,fighters,Fighter 1: True when the fighter was ranked on that board,"rankings, computed",true/false,0.0,True
+f1_rank_division,fighters,Fighter 1: Division of the board the rank comes from,"rankings, computed",text,0.6648,middleweight
 f1_rank_board_date,fighters,Fighter 1: Date of the weekly board used,"rankings, computed",text,0.6648,2026-10-06
 f1_is_champion,fighters,Fighter 1: True when the fighter was champion on that board,"rankings, computed",true/false,0.0,False
 f1_p4p_rank,fighters,Fighter 1: Pound-for-pound rank on that board; blank when not ranked,"rankings, computed",integer,0.9511,4.0
-f2_name,fighters,Fighter 2: Name as listed by ufcstats,ufcstats,text,0.0,Jai Herbert
-f2_id,fighters,Fighter 2: ufcstats fighter ID,ufcstats,text,0.0,4c88a1db5a46c6a4
-f2_age,fighters,Fighter 2: Age in years on the event date; date of birth is not published,"ufcstats, computed",number,0.0001,38.41
-f2_height_cm,fighters,Fighter 2: Height in centimeters; blank when ufcstats lists none,ufcstats,number,0.0001,185.42
-f2_reach_cm,fighters,Fighter 2: Reach in centimeters; blank when ufcstats lists none,ufcstats,number,0.0298,195.58
-f2_stance,fighters,Fighter 2: Stance; blank when ufcstats lists none,ufcstats,text,0.004,Orthodox
-f2_rank,fighters,Fighter 2: Official UFC rank on the last weekly board before the event; 0 is the champion; blank means unranked,"rankings, computed",integer,0.7681,8.0
-f2_is_ranked,fighters,Fighter 2: True when the fighter was ranked on that board,"rankings, computed",true/false,0.0,False
-f2_rank_division,fighters,Fighter 2: Division of the board the rank comes from,"rankings, computed",text,0.7681,womensflyweight
-f2_rank_board_date,fighters,Fighter 2: Date of the weekly board used,"rankings, computed",text,0.7681,2026-09-29
+f2_name,fighters,Fighter 2: Name as listed by ufcstats,ufcstats,text,0.0,Christian Leroy Duncan
+f2_id,fighters,Fighter 2: ufcstats fighter ID,ufcstats,text,0.0,a93f94c923c3a9cb
+f2_age,fighters,Fighter 2: Age in years on the event date; date of birth is not published,"ufcstats, computed",number,0.0001,31.21
+f2_height_cm,fighters,Fighter 2: Height in centimeters; blank when ufcstats lists none,ufcstats,number,0.0001,187.96
+f2_reach_cm,fighters,Fighter 2: Reach in centimeters; blank when ufcstats lists none,ufcstats,number,0.0298,200.66
+f2_stance,fighters,Fighter 2: Stance; blank when ufcstats lists none,ufcstats,text,0.004,Switch
+f2_rank,fighters,Fighter 2: Official UFC rank on the last weekly board before the event; 0 is the champion; blank means unranked,"rankings, computed",integer,0.7681,10.0
+f2_is_ranked,fighters,Fighter 2: True when the fighter was ranked on that board,"rankings, computed",true/false,0.0,True
+f2_rank_division,fighters,Fighter 2: Division of the board the rank comes from,"rankings, computed",text,0.7681,middleweight
+f2_rank_board_date,fighters,Fighter 2: Date of the weekly board used,"rankings, computed",text,0.7681,2026-10-06
 f2_is_champion,fighters,Fighter 2: True when the fighter was champion on that board,"rankings, computed",true/false,0.0,False
 f2_p4p_rank,fighters,Fighter 2: Pound-for-pound rank on that board; blank when not ranked,"rankings, computed",integer,0.9862,13.0
 has_odds,odds,True when betting odds were found for the fight,"BestFightOdds, computed",true/false,0.0,True
-f1_open,odds,Fighter 1: Opening American moneyline,BestFightOdds,integer,0.0056,-185.0
-f1_close_low,odds,Fighter 1: Low end of the closing line range across books,BestFightOdds,integer,0.0056,-213.0
-f1_close_high,odds,Fighter 1: High end of the closing line range across books,BestFightOdds,integer,0.0056,-188.0
-f2_open,odds,Fighter 2: Opening American moneyline,BestFightOdds,integer,0.0056,161.0
-f2_close_low,odds,Fighter 2: Low end of the closing line range across books,BestFightOdds,integer,0.0056,150.0
-f2_close_high,odds,Fighter 2: High end of the closing line range across books,BestFightOdds,integer,0.0056,179.0
-open_overround,odds,Sum of the two opening implied probabilities; 1 plus the bookmaker margin,"BestFightOdds, computed",number,0.0056,1.0323
-f1_open_prob_novig,odds,Fighter 1: opening win probability with the bookmaker margin removed,"BestFightOdds, computed",number,0.0056,0.6288
-f2_open_prob_novig,odds,Fighter 2: opening win probability with the bookmaker margin removed,"BestFightOdds, computed",number,0.0056,0.3712
-f1_close_prob_novig,odds,"Fighter 1: closing win probability, from the midpoint of the closing range, margin removed","BestFightOdds, computed",number,0.0056,0.6374
-f2_close_prob_novig,odds,"Fighter 2: closing win probability, from the midpoint of the closing range, margin removed","BestFightOdds, computed",number,0.0056,0.3626
+f1_open,odds,Fighter 1: Opening American moneyline,BestFightOdds,integer,0.0056,-210.0
+f1_close_low,odds,Fighter 1: Low end of the closing line range across books,BestFightOdds,integer,0.0056,-122.0
+f1_close_high,odds,Fighter 1: High end of the closing line range across books,BestFightOdds,integer,0.0056,-108.0
+f2_open,odds,Fighter 2: Opening American moneyline,BestFightOdds,integer,0.0056,180.0
+f2_close_low,odds,Fighter 2: Low end of the closing line range across books,BestFightOdds,integer,0.0056,-108.0
+f2_close_high,odds,Fighter 2: High end of the closing line range across books,BestFightOdds,integer,0.0056,100.0
+open_overround,odds,Sum of the two opening implied probabilities; 1 plus the bookmaker margin,"BestFightOdds, computed",number,0.0056,1.0346
+f1_open_prob_novig,odds,Fighter 1: opening win probability with the bookmaker margin removed,"BestFightOdds, computed",number,0.0056,0.6548
+f2_open_prob_novig,odds,Fighter 2: opening win probability with the bookmaker margin removed,"BestFightOdds, computed",number,0.0056,0.3452
+f1_close_prob_novig,odds,"Fighter 1: closing win probability, from the midpoint of the closing range, margin removed","BestFightOdds, computed",number,0.0056,0.5119
+f2_close_prob_novig,odds,"Fighter 2: closing win probability, from the midpoint of the closing range, margin removed","BestFightOdds, computed",number,0.0056,0.4881
 favorite_open,odds,1 or 2: the fighter favored on the opening line,"BestFightOdds, computed",integer,0.0056,1.0
-favorite_won,odds,True when the opening favorite won; blank for draws and no contests,"BestFightOdds, computed",true/false,0.0242,False
+favorite_won,odds,True when the opening favorite won; blank for draws and no contests,"BestFightOdds, computed",true/false,0.0242,True
 bfo_event,odds,"Event name as listed by BestFightOdds, which is not always accurate",BestFightOdds,text,0.0056,UFC 332
 bfo_date,odds,"Event date as listed by BestFightOdds, sometimes a day later than ufcstats",BestFightOdds,text,0.0056,2026-10-11
 f1_tot_kd,performance: whole fight,"Fighter 1: knockdowns, whole fight",ufcstats,integer,0.0,0
-f1_tot_sig_str_landed,performance: whole fight,"Fighter 1: significant strikes landed, whole fight",ufcstats,integer,0.0,43
-f1_tot_sig_str_att,performance: whole fight,"Fighter 1: significant strikes attempted, whole fight",ufcstats,integer,0.0,86
-f1_tot_total_str_landed,performance: whole fight,"Fighter 1: total strikes landed, whole fight",ufcstats,integer,0.0,51
-f1_tot_total_str_att,performance: whole fight,"Fighter 1: total strikes attempted, whole fight",ufcstats,integer,0.0,94
-f1_tot_td_landed,performance: whole fight,"Fighter 1: takedowns landed, whole fight",ufcstats,integer,0.0,2
-f1_tot_td_att,performance: whole fight,"Fighter 1: takedowns attempted, whole fight",ufcstats,integer,0.0,4
-f1_tot_sub_att,performance: whole fight,"Fighter 1: submission attempts, whole fight",ufcstats,integer,0.0,0
-f1_tot_rev,performance: whole fight,"Fighter 1: reversals, whole fight",ufcstats,integer,0.0,0
-f1_tot_ctrl_sec,performance: whole fight,"Fighter 1: control time in seconds, whole fight",ufcstats,integer,0.0,161
-f1_tot_head_landed,performance: whole fight,"Fighter 1: head strikes landed, whole fight",ufcstats,integer,0.0,26
-f1_tot_head_att,performance: whole fight,"Fighter 1: head strikes attempted, whole fight",ufcstats,integer,0.0,61
-f1_tot_body_landed,performance: whole fight,"Fighter 1: body strikes landed, whole fight",ufcstats,integer,0.0,6
-f1_tot_body_att,performance: whole fight,"Fighter 1: body strikes attempted, whole fight",ufcstats,integer,0.0,10
-f1_tot_leg_landed,performance: whole fight,"Fighter 1: leg strikes landed, whole fight",ufcstats,integer,0.0,11
-f1_tot_leg_att,performance: whole fight,"Fighter 1: leg strikes attempted, whole fight",ufcstats,integer,0.0,15
-f1_tot_distance_landed,performance: whole fight,"Fighter 1: strikes landed at distance, whole fight",ufcstats,integer,0.0,36
-f1_tot_distance_att,performance: whole fight,"Fighter 1: strikes attempted at distance, whole fight",ufcstats,integer,0.0,77
-f1_tot_clinch_landed,performance: whole fight,"Fighter 1: strikes landed in the clinch, whole fight",ufcstats,integer,0.0,3
-f1_tot_clinch_att,performance: whole fight,"Fighter 1: strikes attempted in the clinch, whole fight",ufcstats,integer,0.0,3
-f1_tot_ground_landed,performance: whole fight,"Fighter 1: ground strikes landed, whole fight",ufcstats,integer,0.0,4
-f1_tot_ground_att,performance: whole fight,"Fighter 1: ground strikes attempted, whole fight",ufcstats,integer,0.0,6
+f1_tot_sig_str_landed,performance: whole fight,"Fighter 1: significant strikes landed, whole fight",ufcstats,integer,0.0,51
+f1_tot_sig_str_att,performance: whole fight,"Fighter 1: significant strikes attempted, whole fight",ufcstats,integer,0.0,107
+f1_tot_total_str_landed,performance: whole fight,"Fighter 1: total strikes landed, whole fight",ufcstats,integer,0.0,91
+f1_tot_total_str_att,performance: whole fight,"Fighter 1: total strikes attempted, whole fight",ufcstats,integer,0.0,150
+f1_tot_td_landed,performance: whole fight,"Fighter 1: takedowns landed, whole fight",ufcstats,integer,0.0,4
+f1_tot_td_att,performance: whole fight,"Fighter 1: takedowns attempted, whole fight",ufcstats,integer,0.0,11
+f1_tot_sub_att,performance: whole fight,"Fighter 1: submission attempts, whole fight",ufcstats,integer,0.0,2
+f1_tot_rev,performance: whole fight,"Fighter 1: reversals, whole fight",ufcstats,integer,0.0,1
+f1_tot_ctrl_sec,performance: whole fight,"Fighter 1: control time in seconds, whole fight",ufcstats,integer,0.0,519
+f1_tot_head_landed,performance: whole fight,"Fighter 1: head strikes landed, whole fight",ufcstats,integer,0.0,34
+f1_tot_head_att,performance: whole fight,"Fighter 1: head strikes attempted, whole fight",ufcstats,integer,0.0,85
+f1_tot_body_landed,performance: whole fight,"Fighter 1: body strikes landed, whole fight",ufcstats,integer,0.0,12
+f1_tot_body_att,performance: whole fight,"Fighter 1: body strikes attempted, whole fight",ufcstats,integer,0.0,16
+f1_tot_leg_landed,performance: whole fight,"Fighter 1: leg strikes landed, whole fight",ufcstats,integer,0.0,5
+f1_tot_leg_att,performance: whole fight,"Fighter 1: leg strikes attempted, whole fight",ufcstats,integer,0.0,6
+f1_tot_distance_landed,performance: whole fight,"Fighter 1: strikes landed at distance, whole fight",ufcstats,integer,0.0,32
+f1_tot_distance_att,performance: whole fight,"Fighter 1: strikes attempted at distance, whole fight",ufcstats,integer,0.0,83
+f1_tot_clinch_landed,performance: whole fight,"Fighter 1: strikes landed in the clinch, whole fight",ufcstats,integer,0.0,12
+f1_tot_clinch_att,performance: whole fight,"Fighter 1: strikes attempted in the clinch, whole fight",ufcstats,integer,0.0,16
+f1_tot_ground_landed,performance: whole fight,"Fighter 1: ground strikes landed, whole fight",ufcstats,integer,0.0,7
+f1_tot_ground_att,performance: whole fight,"Fighter 1: ground strikes attempted, whole fight",ufcstats,integer,0.0,8
 f2_tot_kd,performance: whole fight,"Fighter 2: knockdowns, whole fight",ufcstats,integer,0.0,0
-f2_tot_sig_str_landed,performance: whole fight,"Fighter 2: significant strikes landed, whole fight",ufcstats,integer,0.0,54
-f2_tot_sig_str_att,performance: whole fight,"Fighter 2: significant strikes attempted, whole fight",ufcstats,integer,0.0,157
-f2_tot_total_str_landed,performance: whole fight,"Fighter 2: total strikes landed, whole fight",ufcstats,integer,0.0,80
-f2_tot_total_str_att,performance: whole fight,"Fighter 2: total strikes attempted, whole fight",ufcstats,integer,0.0,194
+f2_tot_sig_str_landed,performance: whole fight,"Fighter 2: significant strikes landed, whole fight",ufcstats,integer,0.0,106
+f2_tot_sig_str_att,performance: whole fight,"Fighter 2: significant strikes attempted, whole fight",ufcstats,integer,0.0,189
+f2_tot_total_str_landed,performance: whole fight,"Fighter 2: total strikes landed, whole fight",ufcstats,integer,0.0,126
+f2_tot_total_str_att,performance: whole fight,"Fighter 2: total strikes attempted, whole fight",ufcstats,integer,0.0,212
 f2_tot_td_landed,performance: whole fight,"Fighter 2: takedowns landed, whole fight",ufcstats,integer,0.0,0
-f2_tot_td_att,performance: whole fight,"Fighter 2: takedowns attempted, whole fight",ufcstats,integer,0.0,1
+f2_tot_td_att,performance: whole fight,"Fighter 2: takedowns attempted, whole fight",ufcstats,integer,0.0,0
 f2_tot_sub_att,performance: whole fight,"Fighter 2: submission attempts, whole fight",ufcstats,integer,0.0,0
 f2_tot_rev,performance: whole fight,"Fighter 2: reversals, whole fight",ufcstats,integer,0.0,1
-f2_tot_ctrl_sec,performance: whole fight,"Fighter 2: control time in seconds, whole fight",ufcstats,integer,0.0,175
-f2_tot_head_landed,performance: whole fight,"Fighter 2: head strikes landed, whole fight",ufcstats,integer,0.0,25
-f2_tot_head_att,performance: whole fight,"Fighter 2: head strikes attempted, whole fight",ufcstats,integer,0.0,116
-f2_tot_body_landed,performance: whole fight,"Fighter 2: body strikes landed, whole fight",ufcstats,integer,0.0,19
-f2_tot_body_att,performance: whole fight,"Fighter 2: body strikes attempted, whole fight",ufcstats,integer,0.0,28
-f2_tot_leg_landed,performance: whole fight,"Fighter 2: leg strikes landed, whole fight",ufcstats,integer,0.0,10
-f2_tot_leg_att,performance: whole fight,"Fighter 2: leg strikes attempted, whole fight",ufcstats,integer,0.0,13
-f2_tot_distance_landed,performance: whole fight,"Fighter 2: strikes landed at distance, whole fight",ufcstats,integer,0.0,43
-f2_tot_distance_att,performance: whole fight,"Fighter 2: strikes attempted at distance, whole fight",ufcstats,integer,0.0,138
-f2_tot_clinch_landed,performance: whole fight,"Fighter 2: strikes landed in the clinch, whole fight",ufcstats,integer,0.0,8
-f2_tot_clinch_att,performance: whole fight,"Fighter 2: strikes attempted in the clinch, whole fight",ufcstats,integer,0.0,8
-f2_tot_ground_landed,performance: whole fight,"Fighter 2: ground strikes landed, whole fight",ufcstats,integer,0.0,3
-f2_tot_ground_att,performance: whole fight,"Fighter 2: ground strikes attempted, whole fight",ufcstats,integer,0.0,11
+f2_tot_ctrl_sec,performance: whole fight,"Fighter 2: control time in seconds, whole fight",ufcstats,integer,0.0,231
+f2_tot_head_landed,performance: whole fight,"Fighter 2: head strikes landed, whole fight",ufcstats,integer,0.0,65
+f2_tot_head_att,performance: whole fight,"Fighter 2: head strikes attempted, whole fight",ufcstats,integer,0.0,137
+f2_tot_body_landed,performance: whole fight,"Fighter 2: body strikes landed, whole fight",ufcstats,integer,0.0,20
+f2_tot_body_att,performance: whole fight,"Fighter 2: body strikes attempted, whole fight",ufcstats,integer,0.0,24
+f2_tot_leg_landed,performance: whole fight,"Fighter 2: leg strikes landed, whole fight",ufcstats,integer,0.0,21
+f2_tot_leg_att,performance: whole fight,"Fighter 2: leg strikes attempted, whole fight",ufcstats,integer,0.0,28
+f2_tot_distance_landed,performance: whole fight,"Fighter 2: strikes landed at distance, whole fight",ufcstats,integer,0.0,87
+f2_tot_distance_att,performance: whole fight,"Fighter 2: strikes attempted at distance, whole fight",ufcstats,integer,0.0,165
+f2_tot_clinch_landed,performance: whole fight,"Fighter 2: strikes landed in the clinch, whole fight",ufcstats,integer,0.0,10
+f2_tot_clinch_att,performance: whole fight,"Fighter 2: strikes attempted in the clinch, whole fight",ufcstats,integer,0.0,15
+f2_tot_ground_landed,performance: whole fight,"Fighter 2: ground strikes landed, whole fight",ufcstats,integer,0.0,9
+f2_tot_ground_att,performance: whole fight,"Fighter 2: ground strikes attempted, whole fight",ufcstats,integer,0.0,9
 f1_r1_kd,performance: by round,Fighter 1: knockdowns in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f1_r1_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,13
-f1_r1_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,33
-f1_r1_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,14
-f1_r1_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,34
+f1_r1_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,15
+f1_r1_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,22
+f1_r1_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,16
+f1_r1_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,25
 f1_r1_td_landed,performance: by round,Fighter 1: takedowns landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
-f1_r1_td_att,performance: by round,Fighter 1: takedowns attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
+f1_r1_td_att,performance: by round,Fighter 1: takedowns attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,4
 f1_r1_sub_att,performance: by round,Fighter 1: submission attempts in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f1_r1_rev,performance: by round,Fighter 1: reversals in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f1_r1_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,62
-f1_r1_head_landed,performance: by round,Fighter 1: head strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,8
-f1_r1_head_att,performance: by round,Fighter 1: head strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,24
-f1_r1_body_landed,performance: by round,Fighter 1: body strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,2
-f1_r1_body_att,performance: by round,Fighter 1: body strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,2
-f1_r1_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,3
-f1_r1_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,7
-f1_r1_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,8
-f1_r1_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,26
-f1_r1_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
-f1_r1_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
-f1_r1_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,4
-f1_r1_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,6
+f1_r1_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,91
+f1_r1_head_landed,performance: by round,Fighter 1: head strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,11
+f1_r1_head_att,performance: by round,Fighter 1: head strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,18
+f1_r1_body_landed,performance: by round,Fighter 1: body strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,3
+f1_r1_body_att,performance: by round,Fighter 1: body strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,3
+f1_r1_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
+f1_r1_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
+f1_r1_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,5
+f1_r1_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,12
+f1_r1_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,10
+f1_r1_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,10
+f1_r1_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
+f1_r1_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f1_r2_kd,performance: by round,Fighter 1: knockdowns in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f1_r2_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,6.0
-f1_r2_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,14.0
-f1_r2_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,7.0
-f1_r2_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,15.0
+f1_r2_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,10.0
+f1_r2_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,24.0
+f1_r2_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,33.0
+f1_r2_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,47.0
 f1_r2_td_landed,performance: by round,Fighter 1: takedowns landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
-f1_r2_td_att,performance: by round,Fighter 1: takedowns attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
-f1_r2_sub_att,performance: by round,Fighter 1: submission attempts in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f1_r2_td_att,performance: by round,Fighter 1: takedowns attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
+f1_r2_sub_att,performance: by round,Fighter 1: submission attempts in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
 f1_r2_rev,performance: by round,Fighter 1: reversals in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f1_r2_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,63.0
-f1_r2_head_landed,performance: by round,Fighter 1: head strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
-f1_r2_head_att,performance: by round,Fighter 1: head strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,7.0
-f1_r2_body_landed,performance: by round,Fighter 1: body strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f1_r2_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,169.0
+f1_r2_head_landed,performance: by round,Fighter 1: head strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,6.0
+f1_r2_head_att,performance: by round,Fighter 1: head strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,18.0
+f1_r2_body_landed,performance: by round,Fighter 1: body strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
 f1_r2_body_att,performance: by round,Fighter 1: body strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,3.0
-f1_r2_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,4.0
-f1_r2_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,4.0
-f1_r2_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,6.0
-f1_r2_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,14.0
-f1_r2_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f1_r2_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f1_r2_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f1_r2_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f1_r2_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
+f1_r2_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,3.0
+f1_r2_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,8.0
+f1_r2_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,20.0
+f1_r2_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
+f1_r2_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
+f1_r2_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
+f1_r2_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
 f1_r3_kd,performance: by round,Fighter 1: knockdowns in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f1_r3_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,24.0
-f1_r3_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,39.0
-f1_r3_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,30.0
-f1_r3_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,45.0
-f1_r3_td_landed,performance: by round,Fighter 1: takedowns landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f1_r3_td_att,performance: by round,Fighter 1: takedowns attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,2.0
+f1_r3_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f1_r3_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f1_r3_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,22.0
+f1_r3_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,23.0
+f1_r3_td_landed,performance: by round,Fighter 1: takedowns landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,1.0
+f1_r3_td_att,performance: by round,Fighter 1: takedowns attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,3.0
 f1_r3_sub_att,performance: by round,Fighter 1: submission attempts in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f1_r3_rev,performance: by round,Fighter 1: reversals in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f1_r3_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,36.0
-f1_r3_head_landed,performance: by round,Fighter 1: head strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,16.0
-f1_r3_head_att,performance: by round,Fighter 1: head strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,30.0
-f1_r3_body_landed,performance: by round,Fighter 1: body strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,4.0
-f1_r3_body_att,performance: by round,Fighter 1: body strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,5.0
-f1_r3_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,4.0
-f1_r3_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,4.0
-f1_r3_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,22.0
-f1_r3_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,37.0
-f1_r3_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,2.0
-f1_r3_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,2.0
-f1_r3_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f1_r3_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_rev,performance: by round,Fighter 1: reversals in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,1.0
+f1_r3_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,177.0
+f1_r3_head_landed,performance: by round,Fighter 1: head strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f1_r3_head_att,performance: by round,Fighter 1: head strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f1_r3_body_landed,performance: by round,Fighter 1: body strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_body_att,performance: by round,Fighter 1: body strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f1_r3_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f1_r3_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
 f1_r4_kd,performance: by round,Fighter 1: knockdowns in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
-f1_r4_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,24.0
-f1_r4_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,46.0
-f1_r4_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,30.0
-f1_r4_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,52.0
-f1_r4_td_landed,performance: by round,Fighter 1: takedowns landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,1.0
-f1_r4_td_att,performance: by round,Fighter 1: takedowns attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,1.0
+f1_r4_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,17.0
+f1_r4_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,43.0
+f1_r4_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,17.0
+f1_r4_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,43.0
+f1_r4_td_landed,performance: by round,Fighter 1: takedowns landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
+f1_r4_td_att,performance: by round,Fighter 1: takedowns attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f1_r4_sub_att,performance: by round,Fighter 1: submission attempts in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f1_r4_rev,performance: by round,Fighter 1: reversals in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
-f1_r4_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,32.0
-f1_r4_head_landed,performance: by round,Fighter 1: head strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,11.0
-f1_r4_head_att,performance: by round,Fighter 1: head strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,30.0
-f1_r4_body_landed,performance: by round,Fighter 1: body strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,9.0
-f1_r4_body_att,performance: by round,Fighter 1: body strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,12.0
-f1_r4_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,4.0
-f1_r4_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,4.0
-f1_r4_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,21.0
-f1_r4_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,42.0
-f1_r4_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,3.0
+f1_r4_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
+f1_r4_head_landed,performance: by round,Fighter 1: head strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,10.0
+f1_r4_head_att,performance: by round,Fighter 1: head strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,33.0
+f1_r4_body_landed,performance: by round,Fighter 1: body strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,5.0
+f1_r4_body_att,performance: by round,Fighter 1: body strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,8.0
+f1_r4_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,2.0
+f1_r4_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,2.0
+f1_r4_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,16.0
+f1_r4_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,39.0
+f1_r4_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,1.0
 f1_r4_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,4.0
 f1_r4_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f1_r4_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f1_r5_kd,performance: by round,Fighter 1: knockdowns in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f1_r5_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,33.0
-f1_r5_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,52.0
-f1_r5_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,35.0
-f1_r5_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,54.0
-f1_r5_td_landed,performance: by round,Fighter 1: takedowns landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f1_r5_td_att,performance: by round,Fighter 1: takedowns attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f1_r5_sub_att,performance: by round,Fighter 1: submission attempts in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
+f1_r5_sig_str_landed,performance: by round,Fighter 1: significant strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f1_r5_sig_str_att,performance: by round,Fighter 1: significant strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,12.0
+f1_r5_total_str_landed,performance: by round,Fighter 1: total strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f1_r5_total_str_att,performance: by round,Fighter 1: total strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,12.0
+f1_r5_td_landed,performance: by round,Fighter 1: takedowns landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,1.0
+f1_r5_td_att,performance: by round,Fighter 1: takedowns attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f1_r5_sub_att,performance: by round,Fighter 1: submission attempts in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,1.0
 f1_r5_rev,performance: by round,Fighter 1: reversals in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f1_r5_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f1_r5_head_landed,performance: by round,Fighter 1: head strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,19.0
-f1_r5_head_att,performance: by round,Fighter 1: head strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,35.0
-f1_r5_body_landed,performance: by round,Fighter 1: body strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,9.0
-f1_r5_body_att,performance: by round,Fighter 1: body strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,11.0
-f1_r5_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,5.0
-f1_r5_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,6.0
-f1_r5_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,31.0
-f1_r5_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,50.0
-f1_r5_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
-f1_r5_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f1_r5_ctrl_sec,performance: by round,Fighter 1: control time in seconds in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,82.0
+f1_r5_head_landed,performance: by round,Fighter 1: head strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,1.0
+f1_r5_head_att,performance: by round,Fighter 1: head strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,10.0
+f1_r5_body_landed,performance: by round,Fighter 1: body strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f1_r5_body_att,performance: by round,Fighter 1: body strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f1_r5_leg_landed,performance: by round,Fighter 1: leg strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
+f1_r5_leg_att,performance: by round,Fighter 1: leg strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
+f1_r5_distance_landed,performance: by round,Fighter 1: strikes landed at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f1_r5_distance_att,performance: by round,Fighter 1: strikes attempted at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,12.0
+f1_r5_clinch_landed,performance: by round,Fighter 1: strikes landed in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
+f1_r5_clinch_att,performance: by round,Fighter 1: strikes attempted in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f1_r5_ground_landed,performance: by round,Fighter 1: ground strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f1_r5_ground_att,performance: by round,Fighter 1: ground strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f2_r1_kd,performance: by round,Fighter 2: knockdowns in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f2_r1_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,9
-f2_r1_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,42
-f2_r1_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,9
-f2_r1_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,42
+f2_r1_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,24
+f2_r1_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,39
+f2_r1_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,37
+f2_r1_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,53
 f2_r1_td_landed,performance: by round,Fighter 2: takedowns landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f2_r1_td_att,performance: by round,Fighter 2: takedowns attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f2_r1_sub_att,performance: by round,Fighter 2: submission attempts in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f2_r1_rev,performance: by round,Fighter 2: reversals in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f2_r1_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f2_r1_head_landed,performance: by round,Fighter 2: head strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,6
-f2_r1_head_att,performance: by round,Fighter 2: head strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,35
-f2_r1_body_landed,performance: by round,Fighter 2: body strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,2
-f2_r1_body_att,performance: by round,Fighter 2: body strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,4
-f2_r1_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,1
-f2_r1_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,3
-f2_r1_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,9
-f2_r1_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,42
-f2_r1_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
-f2_r1_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
+f2_r1_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,114
+f2_r1_head_landed,performance: by round,Fighter 2: head strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,13
+f2_r1_head_att,performance: by round,Fighter 2: head strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,25
+f2_r1_body_landed,performance: by round,Fighter 2: body strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,6
+f2_r1_body_att,performance: by round,Fighter 2: body strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,7
+f2_r1_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,5
+f2_r1_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,7
+f2_r1_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,17
+f2_r1_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,30
+f2_r1_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,7
+f2_r1_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,9
 f2_r1_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f2_r1_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 1; blank if the fight did not reach that round,ufcstats,integer,0.0,0
 f2_r2_kd,performance: by round,Fighter 2: knockdowns in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f2_r2_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,8.0
-f2_r2_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,37.0
-f2_r2_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,29.0
-f2_r2_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,65.0
+f2_r2_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,14.0
+f2_r2_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,27.0
+f2_r2_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,14.0
+f2_r2_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,27.0
 f2_r2_td_landed,performance: by round,Fighter 2: takedowns landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
 f2_r2_td_att,performance: by round,Fighter 2: takedowns attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
 f2_r2_sub_att,performance: by round,Fighter 2: submission attempts in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f2_r2_rev,performance: by round,Fighter 2: reversals in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
-f2_r2_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,128.0
-f2_r2_head_landed,performance: by round,Fighter 2: head strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,3.0
-f2_r2_head_att,performance: by round,Fighter 2: head strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,26.0
-f2_r2_body_landed,performance: by round,Fighter 2: body strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,3.0
-f2_r2_body_att,performance: by round,Fighter 2: body strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,9.0
-f2_r2_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
-f2_r2_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,2.0
-f2_r2_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,5.0
+f2_r2_rev,performance: by round,Fighter 2: reversals in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f2_r2_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f2_r2_head_landed,performance: by round,Fighter 2: head strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,6.0
+f2_r2_head_att,performance: by round,Fighter 2: head strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,17.0
+f2_r2_body_landed,performance: by round,Fighter 2: body strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,4.0
+f2_r2_body_att,performance: by round,Fighter 2: body strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,4.0
+f2_r2_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,4.0
+f2_r2_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,6.0
+f2_r2_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,13.0
 f2_r2_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,26.0
-f2_r2_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f2_r2_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
-f2_r2_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,3.0
-f2_r2_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,11.0
+f2_r2_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
+f2_r2_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,1.0
+f2_r2_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
+f2_r2_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 2; blank if the fight did not reach that round,ufcstats,integer,0.2551,0.0
 f2_r3_kd,performance: by round,Fighter 2: knockdowns in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f2_r3_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,37.0
-f2_r3_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,78.0
-f2_r3_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,42.0
-f2_r3_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,87.0
+f2_r3_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f2_r3_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f2_r3_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,13.0
+f2_r3_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,15.0
 f2_r3_td_landed,performance: by round,Fighter 2: takedowns landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f2_r3_td_att,performance: by round,Fighter 2: takedowns attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,1.0
+f2_r3_td_att,performance: by round,Fighter 2: takedowns attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
 f2_r3_sub_att,performance: by round,Fighter 2: submission attempts in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f2_r3_rev,performance: by round,Fighter 2: reversals in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f2_r3_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,47.0
-f2_r3_head_landed,performance: by round,Fighter 2: head strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,16.0
-f2_r3_head_att,performance: by round,Fighter 2: head strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,55.0
-f2_r3_body_landed,performance: by round,Fighter 2: body strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,14.0
-f2_r3_body_att,performance: by round,Fighter 2: body strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,15.0
-f2_r3_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,7.0
-f2_r3_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,8.0
-f2_r3_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,29.0
-f2_r3_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,70.0
-f2_r3_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,8.0
-f2_r3_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,8.0
-f2_r3_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
-f2_r3_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_rev,performance: by round,Fighter 2: reversals in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,1.0
+f2_r3_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,117.0
+f2_r3_head_landed,performance: by round,Fighter 2: head strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f2_r3_head_att,performance: by round,Fighter 2: head strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f2_r3_body_landed,performance: by round,Fighter 2: body strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_body_att,performance: by round,Fighter 2: body strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,0.0
+f2_r3_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
+f2_r3_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 3; blank if the fight did not reach that round,ufcstats,integer,0.4144,6.0
 f2_r4_kd,performance: by round,Fighter 2: knockdowns in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
-f2_r4_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,26.0
-f2_r4_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,48.0
-f2_r4_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,33.0
-f2_r4_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,55.0
+f2_r4_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,46.0
+f2_r4_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,89.0
+f2_r4_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,46.0
+f2_r4_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,89.0
 f2_r4_td_landed,performance: by round,Fighter 2: takedowns landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f2_r4_td_att,performance: by round,Fighter 2: takedowns attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f2_r4_sub_att,performance: by round,Fighter 2: submission attempts in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f2_r4_rev,performance: by round,Fighter 2: reversals in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
-f2_r4_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,57.0
-f2_r4_head_landed,performance: by round,Fighter 2: head strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,11.0
-f2_r4_head_att,performance: by round,Fighter 2: head strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,22.0
-f2_r4_body_landed,performance: by round,Fighter 2: body strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,7.0
-f2_r4_body_att,performance: by round,Fighter 2: body strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,13.0
-f2_r4_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,8.0
+f2_r4_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
+f2_r4_head_landed,performance: by round,Fighter 2: head strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,28.0
+f2_r4_head_att,performance: by round,Fighter 2: head strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,66.0
+f2_r4_body_landed,performance: by round,Fighter 2: body strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,8.0
+f2_r4_body_att,performance: by round,Fighter 2: body strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,10.0
+f2_r4_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,10.0
 f2_r4_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,13.0
-f2_r4_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,22.0
-f2_r4_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,44.0
-f2_r4_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,4.0
-f2_r4_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,4.0
+f2_r4_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,45.0
+f2_r4_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,87.0
+f2_r4_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,1.0
+f2_r4_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,2.0
 f2_r4_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f2_r4_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 4; blank if the fight did not reach that round,ufcstats,integer,0.9508,0.0
 f2_r5_kd,performance: by round,Fighter 2: knockdowns in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f2_r5_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,33.0
-f2_r5_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,67.0
-f2_r5_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,49.0
-f2_r5_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,84.0
+f2_r5_sig_str_landed,performance: by round,Fighter 2: significant strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,16.0
+f2_r5_sig_str_att,performance: by round,Fighter 2: significant strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,28.0
+f2_r5_total_str_landed,performance: by round,Fighter 2: total strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,16.0
+f2_r5_total_str_att,performance: by round,Fighter 2: total strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,28.0
 f2_r5_td_landed,performance: by round,Fighter 2: takedowns landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f2_r5_td_att,performance: by round,Fighter 2: takedowns attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f2_r5_sub_att,performance: by round,Fighter 2: submission attempts in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
 f2_r5_rev,performance: by round,Fighter 2: reversals in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f2_r5_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,102.0
-f2_r5_head_landed,performance: by round,Fighter 2: head strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,20.0
-f2_r5_head_att,performance: by round,Fighter 2: head strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,49.0
-f2_r5_body_landed,performance: by round,Fighter 2: body strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,6.0
-f2_r5_body_att,performance: by round,Fighter 2: body strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,8.0
-f2_r5_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,7.0
-f2_r5_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,10.0
-f2_r5_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,28.0
-f2_r5_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,62.0
-f2_r5_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,5.0
-f2_r5_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,5.0
-f2_r5_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-f2_r5_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
-age_diff,differences,"Fighter 1 age minus fighter 2 age, in years","ufcstats, computed",number,0.0001,-12.639999999999995
-reach_diff_cm,differences,"Fighter 1 reach minus fighter 2 reach, in centimeters","ufcstats, computed",number,0.0427,-20.32000000000002
-height_diff_cm,differences,"Fighter 1 height minus fighter 2 height, in centimeters","ufcstats, computed",number,0.0003,-7.619999999999976
-sig_str_landed_diff,differences,"Fighter 1 minus fighter 2: significant strikes landed, whole fight","ufcstats, computed",integer,0.0,-11
-total_str_landed_diff,differences,"Fighter 1 minus fighter 2: total strikes landed, whole fight","ufcstats, computed",integer,0.0,-29
-td_landed_diff,differences,"Fighter 1 minus fighter 2: takedowns landed, whole fight","ufcstats, computed",integer,0.0,2
+f2_r5_ctrl_sec,performance: by round,Fighter 2: control time in seconds in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,0.0
+f2_r5_head_landed,performance: by round,Fighter 2: head strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,12.0
+f2_r5_head_att,performance: by round,Fighter 2: head strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,23.0
+f2_r5_body_landed,performance: by round,Fighter 2: body strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f2_r5_body_att,performance: by round,Fighter 2: body strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f2_r5_leg_landed,performance: by round,Fighter 2: leg strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f2_r5_leg_att,performance: by round,Fighter 2: leg strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,2.0
+f2_r5_distance_landed,performance: by round,Fighter 2: strikes landed at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,12.0
+f2_r5_distance_att,performance: by round,Fighter 2: strikes attempted at distance in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,22.0
+f2_r5_clinch_landed,performance: by round,Fighter 2: strikes landed in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,1.0
+f2_r5_clinch_att,performance: by round,Fighter 2: strikes attempted in the clinch in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f2_r5_ground_landed,performance: by round,Fighter 2: ground strikes landed in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+f2_r5_ground_att,performance: by round,Fighter 2: ground strikes attempted in round 5; blank if the fight did not reach that round,ufcstats,integer,0.9565,3.0
+age_diff,differences,"Fighter 1 age minus fighter 2 age, in years","ufcstats, computed",number,0.0001,-0.4299999999999997
+reach_diff_cm,differences,"Fighter 1 reach minus fighter 2 reach, in centimeters","ufcstats, computed",number,0.0427,-10.159999999999997
+height_diff_cm,differences,"Fighter 1 height minus fighter 2 height, in centimeters","ufcstats, computed",number,0.0003,0.0
+sig_str_landed_diff,differences,"Fighter 1 minus fighter 2: significant strikes landed, whole fight","ufcstats, computed",integer,0.0,-55
+total_str_landed_diff,differences,"Fighter 1 minus fighter 2: total strikes landed, whole fight","ufcstats, computed",integer,0.0,-35
+td_landed_diff,differences,"Fighter 1 minus fighter 2: takedowns landed, whole fight","ufcstats, computed",integer,0.0,4
 kd_diff,differences,"Fighter 1 minus fighter 2: knockdowns, whole fight","ufcstats, computed",integer,0.0,0
-ctrl_sec_diff,differences,"Fighter 1 minus fighter 2: control time in seconds, whole fight","ufcstats, computed",integer,0.0,-14
-head_landed_diff,differences,"Fighter 1 minus fighter 2: head strikes landed, whole fight","ufcstats, computed",integer,0.0,1
-open_prob_diff,differences,"Fighter 1 minus fighter 2 opening win probability, margin removed","BestFightOdds, computed",number,0.0056,0.2576
-both_ranked,differences,True when both fighters were ranked on the last weekly board,"rankings, computed",true/false,0.0,False
-either_ranked,differences,True when at least one fighter was ranked on the last weekly board,"rankings, computed",true/false,0.0,False
+ctrl_sec_diff,differences,"Fighter 1 minus fighter 2: control time in seconds, whole fight","ufcstats, computed",integer,0.0,288
+head_landed_diff,differences,"Fighter 1 minus fighter 2: head strikes landed, whole fight","ufcstats, computed",integer,0.0,-31
+open_prob_diff,differences,"Fighter 1 minus fighter 2 opening win probability, margin removed","BestFightOdds, computed",number,0.0056,0.3096
+both_ranked,differences,True when both fighters were ranked on the last weekly board,"rankings, computed",true/false,0.0,True
+either_ranked,differences,True when at least one fighter was ranked on the last weekly board,"rankings, computed",true/false,0.0,True
 ufc_j1_name,ufcstats judge totals,Judge 1: Judge name as spelled on ufcstats; blank when ufcstats omits it,ufcstats,text,0.5134,Mike Bell
 ufc_j1_first_number,ufcstats judge totals,"Judge 1: First score as printed on ufcstats; it belongs to the fighter who lost the decision, and for draws the order is not defined",ufcstats,integer,0.5102,28.0
 ufc_j1_second_number,ufcstats judge totals,Judge 1: Second score as printed on ufcstats; it belongs to the fighter who won the decision,ufcstats,integer,0.5102,29.0
