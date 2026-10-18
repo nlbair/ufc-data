@@ -1,5 +1,7 @@
 # UFC Data: scorecards, round statistics, and betting odds, 2013 to 2026
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23458636.svg)](https://doi.org/10.5281/zenodo.23458636)
+
 > This project is independent. It is not affiliated with, endorsed by, or sponsored by the UFC. UFC and related marks belong to their owners.
 
 Fight-level and judge-round data for UFC fights from 2013-02-16 through 2026-10-10. It links each judge's round-by-round scorecard to round statistics, betting odds, official rankings at fight time, and fighter attributes, so you can study how judges score rounds and how betting markets price fights.
@@ -34,6 +36,8 @@ R: `readr::read_csv("data/ufc_all_fights_wide.csv")`
 - A blank rank means unranked, not missing. The rank is the official rank on the last weekly board before the event, and 0 is the champion.
 - `finish_type` is decision, ko_tko, submission, dq, overturned, could_not_continue, or other.
 
+> Draft note: the two rule-era dates (see METHODS.md) are provisional and should be confirmed before relying on the rule-era columns.
+
 ## Known limitations
 
 - There is no measure of damage. Statistics are strikes, takedowns, knockdowns, control time, and submission attempts as counted by ufcstats.
@@ -49,7 +53,9 @@ This dataset is built from the sources listed in SOURCES.md, which should be cre
 
 ## How to cite
 
-See CITATION.cff, or use the DOI shown on the Zenodo record once it is assigned.
+Bair, N. (2026). UFC Data: scorecards, round statistics, and betting odds, 2013 to 2026 (Version 0.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.23458636
+
+A machine-readable version is in CITATION.cff.
 
 ## License
 

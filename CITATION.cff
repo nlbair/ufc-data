@@ -3,6 +3,7 @@ message: "If you use this dataset, please cite it as below."
 type: dataset
 title: "UFC Data: scorecards, round statistics, and betting odds, 2013 to 2026"
 version: 0.1.0
+doi: "10.5281/zenodo.23458636"
 date-released: 2026-10-18
 authors:
   - family-names: "Bair"
