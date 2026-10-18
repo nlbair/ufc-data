@@ -34,8 +34,6 @@ R: `readr::read_csv("data/ufc_all_fights_wide.csv")`
 - A blank rank means unranked, not missing. The rank is the official rank on the last weekly board before the event, and 0 is the champion.
 - `finish_type` is decision, ko_tko, submission, dq, overturned, could_not_continue, or other.
 
-> Draft note: the two rule-era dates (see METHODS.md) are provisional and should be confirmed before relying on the rule-era columns.
-
 ## Known limitations
 
 - There is no measure of damage. Statistics are strikes, takedowns, knockdowns, control time, and submission attempts as counted by ufcstats.

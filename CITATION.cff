@@ -7,7 +7,6 @@ date-released: 2026-10-18
 authors:
   - family-names: "Bair"
     given-names: "Noah"
-    affiliation: "Syracuse University"
 license: CC-BY-4.0
 url: "https://github.com/nlbair/ufc-data"
 abstract: "Fight-level and judge-round data for UFC fights from 2013-02-16 through 2026-10-10, linking judges' round-by-round scorecards to round statistics, betting odds, official rankings at fight time, and fighter attributes."
